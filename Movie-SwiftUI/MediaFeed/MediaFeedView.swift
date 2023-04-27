@@ -58,7 +58,7 @@ struct MediaFeedView: View {
             LazyVStack(spacing: 10) {
                 SlidingMediaCardsView(
                     title: "TRENDING MOVIES",
-                    trendingMedias: viewModel.trendingMovies
+                    mediaGroup: viewModel.trendingMovies
                 )
                 .onAppear {
                     viewModel.fetchTrendingMedia(for: .movie)
@@ -66,15 +66,23 @@ struct MediaFeedView: View {
 
                 SlidingMediaCardsView(
                     title: "TRENDING TV SHOWS",
-                    trendingMedias: viewModel.trendingTvShows
+                    mediaGroup: viewModel.trendingTvShows
                 )
                 .onAppear {
                     viewModel.fetchTrendingMedia(for: .series)
                 }
 
+                SlidingVideoCardsView(
+                    title: "LATEST TRAILERS",
+                    videoList: viewModel.latestTrailers
+                )
+                .onAppear {
+                    viewModel.fetchLatestTrailers()
+                }
+
                 SlidingMediaCardsView(
                     title: "POPULAR PERSONS",
-                    trendingMedias: viewModel.trendingPersons
+                    mediaGroup: viewModel.trendingPersons
                 )
                 .onAppear {
                     viewModel.fetchTrendingMedia(for: .person)
@@ -88,7 +96,8 @@ struct MediaFeedView_Previews: PreviewProvider {
     static var previews: some View {
         MediaFeedView(
             viewModel: MediaFeedViewModel(
-                mediaFetcher: MediaFetcher()
+                mediaFetcher: MediaFetcher(),
+                htmlVideoFetcher: HTMLVideoFetcher()
             )
         )
     }

@@ -14,7 +14,8 @@ struct Movie_SwiftUIApp: App {
         WindowGroup {
             MediaFeedView(
                 viewModel: MediaFeedViewModel(
-                    mediaFetcher: MediaFetcher()
+                    mediaFetcher: MediaFetcher(),
+                    htmlVideoFetcher: HTMLVideoFetcher()
                 )
             )
         }

@@ -28,25 +28,27 @@ struct MediaCardView: View {
 
     var body: some View {
         VStack(spacing: 5) {
-            HStack {
-                if let posterUrl = posterUrl {
-                    PosterView(
-                        posterUrl: posterUrl,
-                        rating: rating
-                    )
-                }
+            if let posterUrl = posterUrl {
+                PosterView(
+                    posterUrl: posterUrl,
+                    rating: rating
+                )
+                .frame(height: 240)
             }
-            .frame(height: 240)
+
             Text(title)
                 .font(.callout)
                 .bold()
+                .lineLimit(3)
+                .multilineTextAlignment(.leading)
                 .frame(
                     maxWidth: .infinity,
                     alignment: .leading
                 )
-                .lineLimit(3)
+
             Text(subtitle)
                 .font(.caption)
+                .multilineTextAlignment(.leading)
                 .frame(
                     maxWidth: .infinity,
                     alignment: .leading

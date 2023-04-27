@@ -19,7 +19,7 @@ final class MediaFetcher {
     func fetchTrendingMedias(
         for type: Endpoint.MediaType,
         within period: Endpoint.Period
-    ) async throws -> MediaList? {
+    ) async throws -> MediaGroup? {
         return try await networkHandler.fetchData(
             from: Endpoint.trendingMedia(
                 for: type,
@@ -31,7 +31,7 @@ final class MediaFetcher {
     func searchMedias(
         with title: String,
         for type: Endpoint.MediaType
-    ) async throws -> MediaList? {
+    ) async throws -> MediaGroup? {
         return try await networkHandler.fetchData(
             from: Endpoint.searchMedia(
                 with: title,

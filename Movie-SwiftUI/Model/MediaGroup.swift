@@ -1,5 +1,5 @@
 //
-//  MediaList.swift
+//  MediaGroup.swift
 //  Movie-SwiftUI
 //
 //  Created by Sasi Moorthy on 16.04.23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MediaList: Codable {
+struct MediaGroup: Codable {
 
     enum CodingKeys: String, CodingKey {
         case page = "page"

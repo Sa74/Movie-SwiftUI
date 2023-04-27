@@ -10,16 +10,16 @@ import SwiftUI
 struct SlidingMediaCardsView: View {
 
     private let title: String
-    private let trendingMedias: MediaList?
+    private let mediaGroup: MediaGroup?
     private let mediaDetailViewCreation: ((Media) -> AnyView)?
 
     init(
         title: String,
-        trendingMedias: MediaList?,
+        mediaGroup: MediaGroup?,
         mediaDetailViewCreation: ((Media) -> AnyView)? = nil
     ) {
         self.title = title
-        self.trendingMedias = trendingMedias
+        self.mediaGroup = mediaGroup
         self.mediaDetailViewCreation = mediaDetailViewCreation
     }
 
@@ -36,7 +36,7 @@ struct SlidingMediaCardsView: View {
                     )
 
                 NavigationLink {
-                    if let mediaList = trendingMedias {
+                    if let mediaList = mediaGroup {
                         MediaListView(
                             mediaList: mediaList,
                             title: title,
@@ -50,7 +50,7 @@ struct SlidingMediaCardsView: View {
                 }
             }
 
-            if let trendingMedias = trendingMedias {
+            if let trendingMedias = mediaGroup {
                 ScrollView(.horizontal) {
                     LazyHStack(
                         alignment: .top,
@@ -82,7 +82,7 @@ struct SlidingMediaCardsView_Previews: PreviewProvider {
     static var previews: some View {
         SlidingMediaCardsView(
             title: "TRENDING MOVIES",
-            trendingMedias: MediaList(
+            mediaGroup: MediaGroup(
                 page: 1,
                 results: [.movie(Movie(id: 1,
                                        title: "John Wick",

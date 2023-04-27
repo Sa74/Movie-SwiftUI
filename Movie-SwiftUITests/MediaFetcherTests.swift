@@ -67,6 +67,6 @@ final class MediaFetcherTests: XCTestCase {
 
     private func makeResultMock(from filePath: String) throws {
         let data = try XCTUnwrap(testBundle.contentsOfFile(named: filePath))
-        networkHandler.result = try .success(JSONDecoder().decode(MediaList.self, from: data))
+        networkHandler.result = try .success(JSONDecoder().decode(MediaGroup.self, from: data))
     }
 }

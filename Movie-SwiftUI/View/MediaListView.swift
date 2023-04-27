@@ -14,7 +14,7 @@ struct MediaListView: View {
         case didSelectFilter(String)
     }
 
-    private let mediaList: MediaList
+    private let mediaList: MediaGroup
     private let title: String
     private let filters: [String]
     private let didPerformAction: ((Action) -> Void)?
@@ -22,7 +22,7 @@ struct MediaListView: View {
     @State private var selectedSegmentIndex = 0
 
     init(
-        mediaList: MediaList,
+        mediaList: MediaGroup,
         title: String,
         filters: [String] = [],
         didPerformAction: ((Action) -> Void)?
@@ -38,34 +38,38 @@ struct MediaListView: View {
             List {
                 Section {
                     ForEach(mediaList.results) { media in
-                        HStack(spacing: 10) {
-                            PosterView(
-                                posterUrl: media.posterUrl ?? Image.placeholderUrl,
-                                rating: nil
-                            )
-                            .frame(
-                                width: 60,
-                                height: 80
-                            )
-                            VStack(spacing: 10) {
-                                Text(media.title)
-                                    .frame(
-                                        maxWidth: .infinity,
-                                        alignment: .leading
-                                    )
-                                Text(media.subtitle)
-                                    .frame(
-                                        maxWidth: .infinity,
-                                        alignment: .leading
-                                    )
-                            }
-                            if let rating = media.rating {
-                                RatingCircleView(rating: rating)
-                                    .frame(
-                                        width: 30,
-                                        height: 30
-                                    )
-                                    .padding(.trailing, 10)
+                        NavigationLink {
+
+                        } label: {
+                            HStack(spacing: 10) {
+                                PosterView(
+                                    posterUrl: media.posterUrl ?? Image.placeholderUrl,
+                                    rating: nil
+                                )
+                                .frame(
+                                    width: 60,
+                                    height: 80
+                                )
+                                VStack(spacing: 10) {
+                                    Text(media.title)
+                                        .frame(
+                                            maxWidth: .infinity,
+                                            alignment: .leading
+                                        )
+                                    Text(media.subtitle)
+                                        .frame(
+                                            maxWidth: .infinity,
+                                            alignment: .leading
+                                        )
+                                }
+                                if let rating = media.rating {
+                                    RatingCircleView(rating: rating)
+                                        .frame(
+                                            width: 30,
+                                            height: 30
+                                        )
+                                        .padding(.trailing, 10)
+                                }
                             }
                         }
                     }
