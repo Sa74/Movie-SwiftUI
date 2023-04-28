@@ -24,7 +24,7 @@ struct HTMLVideoFetcher {
         var mediaIds: Set<Video> = []
         for element in mediaElements {
             guard let hrefValue = try? element.attr("href").components(separatedBy: "/"),
-                  let mediaType = Endpoint.MediaType(rawValue: hrefValue[1]),
+                  hrefValue.count > 2,
                   let id = hrefValue.last,
                   let dataId = try? element.attr("data-id"),
                   let title = try? element.attr("title"),
@@ -32,10 +32,11 @@ struct HTMLVideoFetcher {
                   let thumbnailPath = try? element.children().attr("src") else {
                 continue
             }
+            let media = hrefValue[1]
             mediaIds.insert(
                 Video(
                     id: id,
-                    mediaType: mediaType,
+                    media: media,
                     dataId: dataId,
                     title: title,
                     subtitle: subtitle,
@@ -56,7 +57,7 @@ extension Endpoint {
         case inTheaters = "in-theaters"
     }
 
-    static func trailersUrl(for type: TrailerType) -> URL {
+    static func trailerListUrl(for type: TrailerType) -> URL {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "www.themoviedb.org"
@@ -65,7 +66,7 @@ extension Endpoint {
             URLQueryItem(name: "panel", value: "trailer_scroller"),
             URLQueryItem(name: "language", value: "en-US"),
             URLQueryItem(name: "group", value: type.rawValue),
-            URLQueryItem(name: "include_adult", value: "false")
+            URLQueryItem(name: "include_adult", value: "true")
         ]
 
         guard let url = components.url else {
@@ -80,8 +81,8 @@ extension Endpoint {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "www.youtube.com"
-        components.path = "/embed/" + id
-
+        components.path = "/embed/\(id)"
+        
         guard let url = components.url else {
             preconditionFailure(
                 "Invalid URL components: \(components)"

@@ -13,7 +13,7 @@ final class MediaFeedViewModel: ObservableObject {
     private let htmlVideoFetcher: HTMLVideoFetcher
 
     @MainActor @Published var trendingMedia: [Endpoint.MediaType: MediaGroup] = [:]
-    @MainActor @Published  var trailers: [Video]?
+    @MainActor @Published var latestTrailers: [Video]?
     @MainActor @Published var searchResult: MediaGroup?
 
     @MainActor
@@ -29,11 +29,6 @@ final class MediaFeedViewModel: ObservableObject {
     @MainActor
     var trendingPersons: MediaGroup? {
         return trendingMedia[.person]
-    }
-
-    @MainActor
-    var latestTrailers: [Video]? {
-        return trailers
     }
 
     init(
@@ -89,13 +84,11 @@ final class MediaFeedViewModel: ObservableObject {
     ) {
         Task {
             do {
-                guard trailers == nil else {
+                guard latestTrailers == nil else {
                     return
                 }
-
-                trailers = try await HTMLVideoFetcher()
-                    .fetchVideos(
-                        from: Endpoint.trailersUrl(for: type)
+                latestTrailers = try await htmlVideoFetcher.fetchVideos(
+                        from: Endpoint.trailerListUrl(for: type)
                     )
             } catch {
                 print(error)

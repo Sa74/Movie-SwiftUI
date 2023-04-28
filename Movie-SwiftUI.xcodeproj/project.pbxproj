@@ -216,8 +216,8 @@
 				25F0B2B529EC5D1100B8EE89 /* PosterView.swift */,
 				25F0B2B329EC5CED00B8EE89 /* RatingCircleView.swift */,
 				25F0AE4729EC37C800B8EE89 /* SlidingMediaCardsView.swift */,
-				256A379829FA6E9F001E7B2F /* VideoCardView.swift */,
 				256A379A29FAA121001E7B2F /* SlidingVideoCardsView.swift */,
+				256A379829FA6E9F001E7B2F /* VideoCardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

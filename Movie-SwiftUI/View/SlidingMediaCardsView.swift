@@ -46,7 +46,6 @@ struct SlidingMediaCardsView: View {
                 } label: {
                     Image(systemName: "arrow.forward")
                         .padding(.trailing, 20)
-                        .foregroundColor(.black)
                 }
             }
 

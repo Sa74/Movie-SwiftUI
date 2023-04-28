@@ -9,7 +9,7 @@ import Foundation
 
 struct Video: Hashable & Identifiable {
     let id: String
-    let mediaType: Endpoint.MediaType
+    let media: String
     let dataId: String
     let title: String
     let subtitle: String
@@ -20,6 +20,6 @@ struct Video: Hashable & Identifiable {
     }
 
     var videoUrl: URL {
-        return Endpoint.youTubeVideoUrl(for: id)
+        return Endpoint.youTubeVideoUrl(for: dataId)
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WebKit
 
 struct VideoCardView: View {
 
@@ -14,6 +15,8 @@ struct VideoCardView: View {
     private let thumbnailUrl: URL
     private let title: String
     private let subtitle: String
+
+    @State var webViewWrapper: WebViewWrapper?
 
     init(
         videoId: String,
@@ -32,15 +35,15 @@ struct VideoCardView: View {
     var body: some View {
         VStack(spacing: 5) {
             ZStack {
-
                 // STUPID HACK: To hide WebView from display and make the view look more native ;)
-                // Idle solution would be to get videoUrl from server and use AVPlayer instead of YouTube videos
-                WebView(webUrl: videoUrl)
-                    .cornerRadius(10)
-                    .clipped()
-                    .frame(
-                        height: 200
-                    )
+                if let webViewWrapper = webViewWrapper {
+                    webViewWrapper
+                        .cornerRadius(10)
+                        .clipped()
+                        .frame(
+                            height: 200
+                        )
+                }
 
                 AsyncImage(
                     url: thumbnailUrl,
@@ -51,7 +54,6 @@ struct VideoCardView: View {
                         ProgressView()
                     }
                 )
-                .allowsHitTesting(false)
                 .cornerRadius(10)
                 .clipped()
                 .frame(
@@ -62,11 +64,19 @@ struct VideoCardView: View {
                     .resizable()
                     .foregroundColor(.white)
                     .shadow(radius: 20)
-                    .allowsHitTesting(false)
                     .frame(
                         width: 50,
                         height: 50
                     )
+            }
+            .onTapGesture {
+                guard webViewWrapper == nil else {
+                    webViewWrapper?.playVideo()
+                    return
+                }
+                webViewWrapper = WebViewWrapper(
+                    videoUrl: videoUrl
+                )
             }
 
             Text(title)
@@ -86,6 +96,7 @@ struct VideoCardView: View {
                     maxWidth: .infinity,
                     alignment: .leading
                 )
+
             Spacer()
         }
         .frame(

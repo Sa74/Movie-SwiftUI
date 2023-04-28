@@ -52,11 +52,13 @@ struct MediaListView: View {
                                 )
                                 VStack(spacing: 10) {
                                     Text(media.title)
+                                        .bold()
                                         .frame(
                                             maxWidth: .infinity,
                                             alignment: .leading
                                         )
                                     Text(media.subtitle)
+                                        .font(.footnote)
                                         .frame(
                                             maxWidth: .infinity,
                                             alignment: .leading
