@@ -55,3 +55,29 @@ struct SlidingVideoCardsView: View {
         .frame(height: 300)
     }
 }
+
+
+struct SlidingVideoCardsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SlidingVideoCardsView(
+            title: "LATEST TRAILERS",
+            videoList: [
+                Video(
+                    id: "71912",
+                    media: "tv",
+                    dataId: "EUlC8ue8NFI",
+                    title: "The Witcher",
+                    subtitle: "Season 3: Official Trailer",
+                    thumbnailPath: "/t/p/w355_and_h200_multi_faces/jBJWaqoSCiARWtfV0GlqHrcdidd.jpg"
+                ),
+                Video(
+                    id: "82856",
+                    media: "tv",
+                    dataId: "9-HW5K6WZg8",
+                    title: "The Mandalorian",
+                    subtitle: "All Episodes Now Streaming",
+                    thumbnailPath: "/t/p/w355_and_h200_multi_faces/6Lw54zxm6BAEKJeGlabyzzR5Juu.jpg"
+                )]
+        )
+    }
+}

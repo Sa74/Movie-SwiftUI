@@ -1,5 +1,5 @@
 //
-//  WebView+Representable.swift
+//  WebViewWrapper.swift
 //  Movie-SwiftUI
 //
 //  Created by Sasi Moorthy on 27.04.23.
@@ -24,6 +24,7 @@ struct WebViewWrapper: UIViewRepresentable {
         self.networkHandler = networkHandler
     }
 
+    // MARK: - UIViewRepresentable Protocol
     func makeUIView(
         context: Context
     ) ->  WKWebView {
@@ -54,13 +55,17 @@ struct WebViewWrapper: UIViewRepresentable {
         return Coordinator()
     }
 
+    // MARK: - Public methods
+    
     func playVideo() {
         webView.evaluateJavaScript(
             "document.querySelector('video').play();",
             completionHandler: nil
         )
     }
+}
 
+extension WebViewWrapper {
     class Coordinator: NSObject, WKNavigationDelegate {
 
         func webView(

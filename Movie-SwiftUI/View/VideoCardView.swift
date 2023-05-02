@@ -105,3 +105,25 @@ struct VideoCardView: View {
         )
     }
 }
+
+struct VideoCardView_Previews: PreviewProvider {
+
+    static let video = Video(
+        id: "71912",
+        media: "tv",
+        dataId: "EUlC8ue8NFI",
+        title: "The Witcher",
+        subtitle: "Season 3: Official Trailer",
+        thumbnailPath: "/t/p/w355_and_h200_multi_faces/jBJWaqoSCiARWtfV0GlqHrcdidd.jpg"
+    )
+
+    static var previews: some View {
+        VideoCardView(
+            videoId: video.dataId,
+            youTubeUrl: video.videoUrl,
+            thumbnailUrl: video.thumbnailUrl,
+            title: video.title,
+            subtitle: video.subtitle
+        )
+    }
+}

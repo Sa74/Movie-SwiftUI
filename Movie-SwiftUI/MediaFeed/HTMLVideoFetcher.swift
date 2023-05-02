@@ -25,7 +25,7 @@ struct HTMLVideoFetcher {
         for element in mediaElements {
             guard let hrefValue = try? element.attr("href").components(separatedBy: "/"),
                   hrefValue.count > 2,
-                  let id = hrefValue.last,
+                  let id = hrefValue.last?.components(separatedBy: "?").first,
                   let dataId = try? element.attr("data-id"),
                   let title = try? element.attr("title"),
                   let subtitle = try? element.attr("data-title"),
